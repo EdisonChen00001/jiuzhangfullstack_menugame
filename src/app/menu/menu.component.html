@@ -1,0 +1,26 @@
+<div class="container">
+
+  <h2 class="page-header">Order Menu Game</h2>
+
+  <h4>{{menu_select}}</h4>
+  <div *ngFor="let menu of menus">
+    <button class="margin_right_20" mat-raised-button color="primary" id="btn_menu_component" (click)="menuControl(menu.name)"
+      value="menu.name"> {{ menu.name }}</button>
+  </div>
+
+
+  <div class="clear_fix add_space_hight"></div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label formArrayName="materials" *ngFor="let order of form.controls.materials.controls; let i = index">
+      <input type="checkbox" [formControlName]="i"> {{materials[i].name}}
+    </label>
+
+    <div *ngIf="!form.valid">最少一种原料要被选择</div>
+    <br>
+    <button mat-raised-button color="primary" variant="outlined" [disabled]="!form.valid">submit</button>
+  </form>
+
+  <div *ngIf="isLogin" class="informBoxBoarder">答对了</div>
+
+</div>
